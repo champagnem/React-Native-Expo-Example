@@ -1,0 +1,26 @@
+{
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "es6": true,
+    "jest": true
+  },
+  "plugins": ["react-native"],
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "rules": {
+    "react/prop-types": 0,
+    "react-native/no-unused-styles": 2,
+    "no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "varsIgnorePattern": "globalLanguage"
+      }
+    ]
+  },
+  "globals": {
+    "globalLanguage": "writable",
+    "dispatch": "writable"
+  }
+}

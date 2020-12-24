@@ -15,6 +15,7 @@ export default function MenuDrawer(props) {
         styles.mainView,
         {
           paddingBottom: safeAreaInsets.bottom, //used to clear the iPhone X and later Home Bar or notches on other devices
+          paddingTop: safeAreaInsets.top,
         },
       ]}
     >

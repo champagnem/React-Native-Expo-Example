@@ -1,20 +1,18 @@
 //Librairies
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { StatusBar } from 'expo-status-bar'
+import ContentWrapper from '../../components/UI/ContentWrapper'
 
 export default function LoginScreen(props) {
   return (
-    <View style={styles.container}>
-      <Text>This is the LoginScreen</Text>
-      <TouchableOpacity 
-      style={styles.button} 
-      onPress={() => props.navigation.navigate('Home')}
-      >
-        <Text>Go to HomeScreen</Text>
-      </TouchableOpacity>
-      <StatusBar style='auto' />
-    </View>
+    <ContentWrapper>
+      <View style={styles.container}>
+        <Text>This is the LoginScreen</Text>
+        <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Home')}>
+          <Text>Go to HomeScreen</Text>
+        </TouchableOpacity>
+      </View>
+    </ContentWrapper>
   )
 }
 

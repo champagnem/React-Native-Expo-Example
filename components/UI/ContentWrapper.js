@@ -5,7 +5,7 @@ import { RFValue } from 'react-native-responsive-fontsize'
 import { withNavigation } from 'react-navigation'
 import { StyleSheet, View, StatusBar } from 'react-native'
 
-function MainContentWrapper(props) {
+function ContentWrapper(props) {
   const renderBody = () => {
     const { children } = props
 
@@ -14,7 +14,7 @@ function MainContentWrapper(props) {
         {renderHeader()}
         <View style={{ flex: 1 }}>{children}</View>
         {/* You could use the same method to add a footer in every screens */}
-        {/* {renderFooter()} */} 
+        {/* {renderFooter()} */}
       </View>
     )
 
@@ -86,16 +86,19 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: RFValue(40),
     height: RFValue(40),
-    marginRight: RFValue(20),
+    marginRight: RFValue(30),
     paddingTop: 0,
   },
   middleText: {
     color: 'white',
     fontSize: RFValue(20),
+    width: '100%',
+    textAlign: 'center',
   },
   middleTextContainer: {
     justifyContent: 'center',
+    width: '57%',
   },
 })
 
-export default withNavigation(MainContentWrapper)
+export default withNavigation(ContentWrapper)

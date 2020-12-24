@@ -11,7 +11,7 @@ const DrawerNavigation = createDrawerNavigator(
   {
     Home: HomeScreen, //First screen in the stack will show first.
     Settings: SettingsScreen,
-   //... Other Screens go here
+    //... Other Screens go here
   },
   {
     contentComponent: MenuDrawer,
@@ -21,21 +21,29 @@ const DrawerNavigation = createDrawerNavigator(
   },
 )
 
-const DrawerStack = createStackNavigator( //The DrawerStack replaces your previous MainStack
+const DrawerStack = createStackNavigator(
+  //The DrawerStack replaces your previous MainStack
   {
     App: DrawerNavigation,
   },
-
+  {
+    headerMode: 'none',
+  },
 )
 
-const AuthStack = createStackNavigator({
-  Login: LoginScreen, //First screen in the stack will show first.
-  // This is where you would add every auth related screens
-  // Register: RegisterScreen,
-  // ResetPassword: ResetPasswordScreen,
-  //...
-})
-
+const AuthStack = createStackNavigator(
+  {
+    Login: LoginScreen, //First screen in the stack will show first.
+    // This is where you would add every auth related screens
+    // Register: RegisterScreen,
+    // ResetPassword: ResetPasswordScreen,
+    //...
+  },
+  // uncomment bellow to remove auth stack default header
+  // {
+  //   headerMode: 'none',
+  // },
+)
 
 export default createAppContainer(
   createSwitchNavigator(

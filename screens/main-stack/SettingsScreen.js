@@ -3,24 +3,22 @@ import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { StatusBar } from 'expo-status-bar'
 
-export default function HomeScreen(props) {
+export default function SettingsScreen(props) {
   return (
     <View style={styles.container}>
-      <Text>This is the HomeScreen</Text>
+      <Text>This is the SettingsScreen</Text>
       <TouchableOpacity
         style={styles.button}
-        onPress={() => props.navigation.navigate('Settings')}
+        onPress={() => props.navigation.navigate('Home')}
       >
-         <Text>Go to SettingsScreen</Text>
+         <Text>Go to HomeScreen</Text>
      </TouchableOpacity> 
-
      <TouchableOpacity
         style={styles.button}
         onPress={() => props.navigation.toggleDrawer()}
       >
          <Text>Toggle Menu Drawer</Text>
      </TouchableOpacity> 
-
       <StatusBar style='auto' />
     </View>
   )

@@ -1,21 +1,25 @@
 // Libraries
-import { Button, Container, Header, Icon, Text } from 'native-base'
+import { Button, Container, Header, Icon, StyleProvider, Text } from 'native-base'
 import React from 'react'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { withNavigation } from 'react-navigation'
 import { StyleSheet, View, StatusBar } from 'react-native'
+import variable from '../../native-base-theme/variables/commonColor'
+import theme from '../../native-base-theme/components'
 
 function ContentWrapper(props) {
   const renderBody = () => {
     const { children } = props
 
     const mainView = (
-      <View style={[styles.content]}>
-        {renderHeader()}
-        <View style={{ flex: 1 }}>{children}</View>
-        {/* You could use the same method to add a footer in every screens */}
-        {/* {renderFooter()} */}
-      </View>
+      <StyleProvider style={theme(variable)}>
+        <View style={[styles.content]}>
+          {renderHeader()}
+          <View style={{ flex: 1 }}>{children}</View>
+          {/* You could use the same method to add a footer in every screens */}
+          {/* {renderFooter()} */}
+        </View>
+      </StyleProvider>
     )
 
     return mainView

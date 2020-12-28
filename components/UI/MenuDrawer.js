@@ -1,6 +1,9 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { RFValue } from 'react-native-responsive-fontsize'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+//
+import variable from '../../native-base-theme/variables/commonColor'
 
 export default function MenuDrawer(props) {
   const safeAreaInsets = useSafeAreaInsets()
@@ -36,18 +39,7 @@ export default function MenuDrawer(props) {
 
       <View style={styles.bottomContainer}>
         <View style={{ flexDirection: 'row' }}>
-          <TouchableOpacity
-            style={{
-              borderRadius: 0,
-              height: 50,
-              width: '100%',
-              backgroundColor: 'red',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexDirection: 'row',
-            }}
-            onPress={() => onLogout()}
-          >
+          <TouchableOpacity style={styles.logoutButton} onPress={() => onLogout()}>
             <Text style={styles.logoutText}>Logout</Text>
           </TouchableOpacity>
         </View>
@@ -58,11 +50,11 @@ export default function MenuDrawer(props) {
 
 const styles = StyleSheet.create({
   mainView: {
-    backgroundColor: 'white',
-    height: '100%',
+    backgroundColor: variable.containerBgColor,
+    height: variable.deviceHeight,
   },
   name: {
-    fontSize: 18,
+    fontSize: RFValue(18),
     textAlign: 'center',
     marginLeft: 2,
   },
@@ -73,8 +65,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     paddingRight: 10,
     paddingLeft: 10,
-    backgroundColor: 'white',
-    height: 100,
+    backgroundColor: variable.containerBgColor,
+    height: variable.deviceHeight * 0.1,
   },
   buttonContainer: {
     paddingVertical: 10,
@@ -86,20 +78,27 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   buttonText: {
-    fontSize: 18,
-    color: 'black',
+    fontSize: RFValue(18),
+    color: variable.brandDark,
     alignSelf: 'center',
     flex: 3,
   },
-
   logoutText: {
-    fontSize: 22,
-    color: 'white',
+    fontSize: RFValue(22),
+    color: variable.brandWhite,
     alignSelf: 'center',
     paddingRight: 0,
     marginRight: 15,
   },
-
+  logoutButton: {
+    borderRadius: 0,
+    height: variable.deviceHeight * 0.05,
+    width: '100%', //This width is set according to the width of the drawer, not the device. The width of the drawer is already responsive.
+    backgroundColor: variable.brandDanger,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+  },
   nameContainer: {
     flexDirection: 'column',
     paddingLeft: 10,
@@ -108,12 +107,18 @@ const styles = StyleSheet.create({
   button: {
     flexDirection: 'row',
     borderRadius: 0,
-    backgroundColor: 'white',
+    backgroundColor: variable.containerBgColor,
     borderWidth: 1,
-    borderColor: 'grey',
+    borderColor: variable.brandLight,
     elevation: 0,
-    width: '100%',
-    height: 60,
-    paddingLeft: 10,
+    height: variable.deviceHeight * 0.07,
+    width: '100%', //This width is set according to the width of the drawer, not the device. The width of the drawer is already responsive.
+    // paddingLeft: 10,
+    // paddingLeft: "10%", //would be sized according to the drawer width
+    paddingLeft: variable.deviceWidth * 0.05,
+    //using variable for padding/margin is most useful when you want the
+    //total height/width of your components (including padding/margin) to equals exactly a specific %
+    //of the device screen otherwise you can stick with the pixels for small margin/padding and use
+    //variable for large ones
   },
 })

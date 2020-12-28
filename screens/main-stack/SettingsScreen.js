@@ -1,7 +1,9 @@
 //Librairies
 import React from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { RFValue } from 'react-native-responsive-fontsize'
 import ContentWrapper from '../../components/UI/ContentWrapper'
+import variable from '../../native-base-theme/variables/commonColor'
 
 export default function SettingsScreen(props) {
   return (
@@ -9,10 +11,10 @@ export default function SettingsScreen(props) {
       <View style={styles.container}>
         <Text>This is the SettingsScreen</Text>
         <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Home')}>
-          <Text>Go to HomeScreen</Text>
+          <Text style={styles.buttonText}>Go to HomeScreen</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => props.navigation.toggleDrawer()}>
-          <Text>Toggle Menu Drawer</Text>
+          <Text style={styles.buttonText}>Toggle Menu Drawer</Text>
         </TouchableOpacity>
       </View>
     </ContentWrapper>
@@ -22,13 +24,17 @@ export default function SettingsScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: variable.containerBgColor,
     alignItems: 'center',
     justifyContent: 'space-evenly',
   },
   button: {
     alignItems: 'center',
-    backgroundColor: 'grey',
+    justifyContent: 'center',
+    backgroundColor: variable.brandCharcoal,
+    height: variable.deviceHeight * 0.06,
+    width: variable.deviceWidth * 0.5,
     padding: 10,
   },
+  buttonText: { color: variable.brandWhite, fontSize: RFValue(14) },
 })

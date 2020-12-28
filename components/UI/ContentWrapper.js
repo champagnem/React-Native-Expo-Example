@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    height: '100%',
+    height: variable.deviceHeight,
   },
   headerContainer: {
     backgroundColor: 'lightgrey',
@@ -77,31 +77,30 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignContent: 'center',
-    width: '100%',
+    width: variable.deviceWidth,
   },
   backIcon: {
     fontSize: RFValue(36),
     height: RFValue(36),
-    color: 'white',
+    color: variable.brandWhite,
     marginLeft: RFValue(20),
     paddingTop: 0,
   },
   menuIconRight: {
-    color: 'white',
+    color: variable.brandWhite,
     fontSize: RFValue(40),
     height: RFValue(40),
     marginRight: RFValue(30),
     paddingTop: 0,
   },
   middleText: {
-    color: 'white',
+    color: variable.brandWhite,
     fontSize: RFValue(20),
-    width: '100%',
     textAlign: 'center',
   },
   middleTextContainer: {
     justifyContent: 'center',
-    width: '57%',
+    width: variable.deviceWidth*.55,
   },
 })
 

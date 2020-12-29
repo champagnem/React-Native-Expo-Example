@@ -21,7 +21,6 @@ function ContentWrapper(props) {
         </View>
       </StyleProvider>
     )
-
     return mainView
   }
 
@@ -30,7 +29,7 @@ function ContentWrapper(props) {
     if (withHeader) {
       return (
         <Header>
-          <StatusBar backgroundColor={'grey'} barStyle='light-content' />
+          <StatusBar backgroundColor={'grey'}  />
           <View>
             <View style={styles.headerContainer}>
               <Button

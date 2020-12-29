@@ -4,6 +4,8 @@ import { Container, Text, Root } from 'native-base'
 import * as Font from 'expo-font'
 import { Ionicons } from '@expo/vector-icons'
 import { useState } from 'react'
+import { StateProvider } from './hooks/Contexts'
+import { ContextReducer } from './hooks/ContextReducer'
 
 export default function App() {
   //Triggers the rendering of the app once loading of assets or API data fetching is completed
@@ -25,10 +27,15 @@ export default function App() {
   }, [fontsLoaded])
 
   if (isLoadingComplete) {
+    const initialState = {
+      globalLanguage: 'en',
+    }
     return (
-      <Root>
-        <AppNavigator />
-      </Root>
+      <StateProvider initialState={initialState} reducer={ContextReducer()}>
+        <Root>
+          <AppNavigator />
+        </Root>
+      </StateProvider>
     )
   } else {
     return (

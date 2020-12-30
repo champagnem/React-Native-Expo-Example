@@ -7,17 +7,25 @@ import { useStateValue } from '../../hooks/Contexts'
 import variable from '../../native-base-theme/variables/commonColor'
 
 export default function HomeScreen(props) {
-  const [{ globalLanguage }] = useStateValue()
+  const [{ globalLanguage }, dispatch] = useStateValue()
 
+  const toggleLanguage = () => {
+    dispatch({
+      type: 'changeGlobalLanguage',
+      newGlobalLanguage: globalLanguage == 'en' ? 'fr' : 'en',
+    })
+  }
   return (
     <ContentWrapper withHeader withMiddleText={'Home'}>
       <View style={styles.container}>
         <Text>This is the HomeScreen</Text>
         <Text>globalLanguage value is: {globalLanguage}</Text>
+        <TouchableOpacity style={styles.button} onPress={() => toggleLanguage()}>
+          <Text style={styles.buttonText}>Toggle globalLanguage</Text>
+        </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Settings')}>
           <Text style={styles.buttonText}>Go to SettingsScreen</Text>
         </TouchableOpacity>
-
         <TouchableOpacity style={styles.button} onPress={() => props.navigation.toggleDrawer()}>
           <Text style={styles.buttonText}>Toggle Menu Drawer</Text>
         </TouchableOpacity>

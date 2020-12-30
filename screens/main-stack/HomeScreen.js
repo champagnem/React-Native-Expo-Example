@@ -5,6 +5,7 @@ import { RFValue } from 'react-native-responsive-fontsize'
 import ContentWrapper from '../../components/UI/ContentWrapper'
 import { useStateValue } from '../../hooks/Contexts'
 import variable from '../../native-base-theme/variables/commonColor'
+import locale from '../../localization/locale'
 
 export default function HomeScreen(props) {
   const [{ globalLanguage }, dispatch] = useStateValue()
@@ -14,7 +15,9 @@ export default function HomeScreen(props) {
       type: 'changeGlobalLanguage',
       newGlobalLanguage: globalLanguage == 'en' ? 'fr' : 'en',
     })
+    locale.locale = globalLanguage == 'en' ? 'fr' : 'en'
   }
+  
   return (
     <ContentWrapper withHeader withMiddleText={'Home'}>
       <View style={styles.container}>

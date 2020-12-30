@@ -6,6 +6,8 @@ import { Ionicons } from '@expo/vector-icons'
 import { useState } from 'react'
 import { StateProvider } from './hooks/Contexts'
 import { ContextReducer } from './hooks/ContextReducer'
+import * as Localization from 'expo-localization'
+import locale from './localization/locale'
 
 export default function App() {
   //Triggers the rendering of the app once loading of assets or API data fetching is completed
@@ -16,6 +18,10 @@ export default function App() {
     Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf'),
     ...Ionicons.font,
   })
+
+  const deviceLanguage = Localization.locale.substring(0, 2)
+
+  locale.locale = deviceLanguage
 
   useEffect(() => {
     if (fontsLoaded) {
@@ -28,7 +34,7 @@ export default function App() {
 
   if (isLoadingComplete) {
     const initialState = {
-      globalLanguage: 'en',
+      globalLanguage: deviceLanguage,
     }
     return (
       <StateProvider initialState={initialState} reducer={ContextReducer()}>

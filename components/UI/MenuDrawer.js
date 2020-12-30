@@ -2,10 +2,15 @@ import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { useStateValue } from '../../hooks/Contexts'
+import locale from '../../localization/locale'
 //
+
 import variable from '../../native-base-theme/variables/commonColor'
 
 export default function MenuDrawer(props) {
+  const [{ globalLanguage }] = useStateValue()
+
   const safeAreaInsets = useSafeAreaInsets()
 
   const onLogout = () => {
@@ -24,23 +29,23 @@ export default function MenuDrawer(props) {
     >
       <TouchableOpacity style={styles.headerContainer}>
         <View style={styles.nameContainer}>
-          <Text style={styles.name}>Expo-Example-App</Text>
+          <Text style={styles.name}> {locale.t('menuDrawer.appName')}</Text>
         </View>
       </TouchableOpacity>
 
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Home')}>
-          <Text style={styles.buttonText}>Home</Text>
+          <Text style={styles.buttonText}>{locale.t('menuDrawer.home')}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Settings')}>
-          <Text style={styles.buttonText}>Settings</Text>
+          <Text style={styles.buttonText}>{locale.t('menuDrawer.settings')}</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.bottomContainer}>
         <View style={{ flexDirection: 'row' }}>
           <TouchableOpacity style={styles.logoutButton} onPress={() => onLogout()}>
-            <Text style={styles.logoutText}>Logout</Text>
+            <Text style={styles.logoutText}>{locale.t('menuDrawer.logout')}</Text>
           </TouchableOpacity>
         </View>
       </View>

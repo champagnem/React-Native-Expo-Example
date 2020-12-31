@@ -1,6 +1,6 @@
 import { Button, Icon } from 'native-base'
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Platform, StatusBar } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useStateValue } from '../../hooks/Contexts'
@@ -74,7 +74,7 @@ export default function MenuDrawer(props) {
 const styles = StyleSheet.create({
   mainView: {
     backgroundColor: variable.containerBgColor,
-    height: variable.deviceHeight,
+    height: Platform.OS === 'ios' ? variable.deviceHeight : variable.deviceHeight - StatusBar.currentHeight,
   },
   name: {
     fontSize: RFValue(18),

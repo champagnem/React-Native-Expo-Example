@@ -5,27 +5,15 @@ import { RFValue } from 'react-native-responsive-fontsize'
 import ContentWrapper from '../../components/UI/ContentWrapper'
 import { useStateValue } from '../../hooks/Contexts'
 import variable from '../../native-base-theme/variables/commonColor'
-import locale from '../../localization/locale'
 
 export default function HomeScreen(props) {
-  const [{ globalLanguage }, dispatch] = useStateValue()
+  const [{ globalLanguage }] = useStateValue()
 
-  const toggleLanguage = () => {
-    dispatch({
-      type: 'changeGlobalLanguage',
-      newGlobalLanguage: globalLanguage == 'en' ? 'fr' : 'en',
-    })
-    locale.locale = globalLanguage == 'en' ? 'fr' : 'en'
-  }
-  
   return (
     <ContentWrapper withHeader withMiddleText={'Home'}>
       <View style={styles.container}>
         <Text>This is the HomeScreen</Text>
         <Text>globalLanguage value is: {globalLanguage}</Text>
-        <TouchableOpacity style={styles.button} onPress={() => toggleLanguage()}>
-          <Text style={styles.buttonText}>Toggle globalLanguage</Text>
-        </TouchableOpacity>
         <TouchableOpacity style={styles.button} onPress={() => props.navigation.navigate('Settings')}>
           <Text style={styles.buttonText}>Go to SettingsScreen</Text>
         </TouchableOpacity>

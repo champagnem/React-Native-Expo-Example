@@ -1,3 +1,4 @@
+import { Button, Icon } from 'native-base'
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { RFValue } from 'react-native-responsive-fontsize'
@@ -9,14 +10,21 @@ import locale from '../../localization/locale'
 import variable from '../../native-base-theme/variables/commonColor'
 
 export default function MenuDrawer(props) {
-  const [{ globalLanguage }] = useStateValue()
+  const [{ globalLanguage }, dispatch] = useStateValue()
 
   const safeAreaInsets = useSafeAreaInsets()
 
   const onLogout = () => {
     props.navigation.navigate('Auth')
   }
-
+  const toggleLanguage = () => {
+    let newLanguage = globalLanguage == 'en' ? 'fr' : 'en'
+    dispatch({
+      type: 'changeGlobalLanguage',
+      newGlobalLanguage: newLanguage,
+    })
+    locale.locale = newLanguage
+  }
   return (
     <View
       style={[
@@ -44,6 +52,16 @@ export default function MenuDrawer(props) {
 
       <View style={styles.bottomContainer}>
         <View style={{ flexDirection: 'row' }}>
+          <Button
+            transparent
+            onPress={() => {
+              toggleLanguage()
+            }}
+            style={styles.languageButton}
+          >
+            <Icon style={[styles.languageIcon]} type={'MaterialIcons'} name='language' />
+            <Text style={[styles.languageText]}>{globalLanguage == 'en' ? 'FR' : 'EN'}</Text>
+          </Button>
           <TouchableOpacity style={styles.logoutButton} onPress={() => onLogout()}>
             <Text style={styles.logoutText}>{locale.t('menuDrawer.logout')}</Text>
           </TouchableOpacity>
@@ -97,8 +115,8 @@ const styles = StyleSheet.create({
   },
   logoutButton: {
     borderRadius: 0,
-    height: variable.deviceHeight * 0.05,
-    width: '100%', //This width is set according to the width of the drawer, not the device. The width of the drawer is already responsive.
+    height: RFValue(50),
+    width: '70%',
     backgroundColor: variable.brandDanger,
     alignItems: 'center',
     justifyContent: 'center',
@@ -117,13 +135,29 @@ const styles = StyleSheet.create({
     borderColor: variable.brandLight,
     elevation: 0,
     height: variable.deviceHeight * 0.07,
-    width: '100%', //This width is set according to the width of the drawer, not the device. The width of the drawer is already responsive.
-    // paddingLeft: 10,
-    // paddingLeft: "10%", //would be sized according to the drawer width
+    width: '100%',
     paddingLeft: variable.deviceWidth * 0.05,
-    //using variable for padding/margin is most useful when you want the
-    //total height/width of your components (including padding/margin) to equals exactly a specific %
-    //of the device screen otherwise you can stick with the pixels for small margin/padding and use
-    //variable for large ones
+  },
+  languageButton: {
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    backgroundColor: variable.brandDark,
+    height: RFValue(50),
+    borderRadius: 0,
+    width: '30%',
+  },
+  languageIcon: {
+    color: variable.brandWhite,
+    fontSize: RFValue(30),
+    marginLeft: 1,
+    marginRight: 1,
+    alignSelf: 'center',
+  },
+  languageText: {
+    color: variable.brandWhite,
+    fontSize: RFValue(22),
+    alignSelf: 'center',
+    paddingRight: 1,
+    paddingLeft: 1,
   },
 })

@@ -5,9 +5,9 @@ import { RFValue } from 'react-native-responsive-fontsize'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useStateValue } from '../../hooks/Contexts'
 import locale from '../../localization/locale'
-//
-
 import variable from '../../native-base-theme/variables/commonColor'
+//
+import { storeData } from '../functions/AsyncStorage'
 
 export default function MenuDrawer(props) {
   const [{ globalLanguage }, dispatch] = useStateValue()
@@ -24,6 +24,7 @@ export default function MenuDrawer(props) {
       newGlobalLanguage: newLanguage,
     })
     locale.locale = newLanguage
+    storeData('preferedLanguage', newLanguage)
   }
   return (
     <View

@@ -8,10 +8,12 @@ import { StateProvider } from './hooks/Contexts'
 import { ContextReducer } from './hooks/ContextReducer'
 import * as Localization from 'expo-localization'
 import locale from './localization/locale'
+import { retrieveData } from './components/functions/AsyncStorage'
 
 export default function App() {
   //Triggers the rendering of the app once loading of assets or API data fetching is completed
   const [isLoadingComplete, setLoadingComplete] = useState()
+  const [initialLanguage, setInitialLanguage] = useState()
 
   const [fontsLoaded] = Font.useFonts({
     Roboto: require('native-base/Fonts/Roboto.ttf'),
@@ -19,22 +21,29 @@ export default function App() {
     ...Ionicons.font,
   })
 
-  const deviceLanguage = Localization.locale.substring(0, 2)
-
-  locale.locale = deviceLanguage
+  const getInitialAppLanguage = async () => {
+    const deviceLanguage = Localization.locale.substring(0, 2)
+    let preferedLanguage = (await retrieveData('preferedLanguage')) || deviceLanguage
+    locale.locale = preferedLanguage
+    setInitialLanguage(preferedLanguage)
+  }
 
   useEffect(() => {
-    if (fontsLoaded) {
+    getInitialAppLanguage()
+  })
+
+  useEffect(() => {
+    if (fontsLoaded && initialLanguage) {
       //setTimemout added for the sole purpose of seeing the "Loading..." for more than a couple microseconds
       setTimeout(() => {
         setLoadingComplete(true)
       }, 2000)
     }
-  }, [fontsLoaded])
+  }, [fontsLoaded, initialLanguage])
 
   if (isLoadingComplete) {
     const initialState = {
-      globalLanguage: deviceLanguage,
+      globalLanguage: initialLanguage,
     }
     return (
       <StateProvider initialState={initialState} reducer={ContextReducer()}>
